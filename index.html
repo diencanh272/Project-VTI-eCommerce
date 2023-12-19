@@ -3,7 +3,73 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+            rel="stylesheet"
+        />
+        <!-- CSS -->
+        <link rel="stylesheet" href="./src/assets/css/main.css" />
+
         <title>Project-VTI-eCommerce</title>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
-    <body></body>
+    <body style="height: 5000px">
+        <!-- Header -->
+
+        <header id="header" class="header">
+            <script>
+                $(document).ready(function () {
+                    $("#header").load("./templates/header.html");
+                });
+            </script>
+        </header>
+
+        <main class="container">
+            <div class="home">
+                <div class="home-container">
+                    <!-- Banner -->
+                    <div id="banner-wrap">
+                        <script>
+                            $(document).ready(function () {
+                                $("#banner-wrap").load(
+                                    "./templates/banner.html"
+                                );
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <section class="home-container">
+                    <!-- Products -->
+
+                    <div id="product-wrap">
+                        <script>
+                            $(document).ready(function () {
+                                $("#product-wrap").load(
+                                    "./templates/product.html"
+                                );
+                            });
+                        </script>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <script>
+                $(document).ready(function () {
+                    $("#footer").load("./templates/footer.html");
+                });
+            </script>
+        </footer>
+
+        <script src="./src/resource/js/index.js"></script>
+    </body>
 </html>

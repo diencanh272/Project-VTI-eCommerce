@@ -1,0 +1,37 @@
+.header {
+    background: var(--header-bg);
+}
+
+.top-bar {
+    position: relative;
+    z-index: 1;
+    padding: 20px 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 1.8rem;
+    font-weight: 500;
+
+    &-link + &-link {
+        margin-left: 20px;
+    }
+    &-link {
+        padding: 10px 0;
+    }
+
+    &-right {
+        display: flex;
+        gap: 28px;
+
+        &__item {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+.home-container {
+    margin-top: 20px;
+}
+.slideshow {
+    position: relative;
+    &__img {
+        width: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__page {
+        &--arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba($color: #fff, $alpha: 0.5);
+
+            cursor: pointer;
+        }
+    }
+
+    &__back {
+        left: 0;
+        transform: translateX(-50%);
+    }
+    &__next {
+        right: 0;
+        transform: translateX(50%);
+    }
+
+    &__icon {
+        margin-top: 3px;
+    }
+}
+
+.banner-wrap {
+    margin-top: 20px;
+}
