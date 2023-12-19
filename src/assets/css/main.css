@@ -1276,10 +1276,6 @@ html {
   margin-top: 20px;
 }
 
-.phone-product {
-  background: #a3090c;
-}
-
 .product-card {
   height: 100%;
   padding: 16px;
@@ -1290,6 +1286,7 @@ html {
 }
 .product-card__wrap {
   padding: 24px 16px;
+  background: #a3090c;
 }
 .product-card:hover {
   transform: translateY(-10px);
