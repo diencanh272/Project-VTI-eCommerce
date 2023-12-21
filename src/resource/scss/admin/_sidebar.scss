@@ -1,0 +1,38 @@
+.detail-section {
+    margin-top: 30px;
+}
+
+.filter-title {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 24px 0 8px;
+}
+
+option {
+    font-size: 1.4rem;
+}
+
+.panel {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.menu {
+    background-color: rgb(217, 227, 242);
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.menu a {
+    color: black;
+}
+
+.btnClass {
+    border: none;
+    background-color: white;
+    width: 100%;
+}
+.btnClass:focus {
+    color: blue;
+}

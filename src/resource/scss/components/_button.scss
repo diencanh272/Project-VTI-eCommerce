@@ -1,0 +1,21 @@
+.btn {
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+.btn-filter {
+    margin: 10px 0;
+    background: #ccc;
+
+    &:hover {
+        background: rgba($color: #ccc, $alpha: 0.8);
+    }
+}
+
+.btn-pad {
+    padding: 8px 0;
+}
+
+.btn-margin {
+    margin: 10px 0;
+}

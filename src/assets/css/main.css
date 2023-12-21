@@ -165,6 +165,18 @@ button {
   overflow: hidden;
 }
 
+.active {
+  background: rgb(111, 111, 248);
+}
+
+input::placeholder {
+  font-size: 1.6rem;
+}
+
+label {
+  font-weight: 500;
+}
+
 .row > *, .container-fluid, .container {
   padding-left: calc(var(--grid-gutter-x) * 0.5);
   padding-right: calc(var(--grid-gutter-x) * 0.5);
@@ -1277,7 +1289,6 @@ html {
 }
 
 .product-card {
-  height: 100%;
   padding: 16px;
   border-radius: 20px;
   box-shadow: 0px 20px 60px 10px rgba(237, 237, 246, 0.2);
@@ -1342,6 +1353,79 @@ html {
 }
 .product-card__cart {
   margin-left: 80px;
+}
+
+.btn {
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+.btn-filter {
+  margin: 10px 0;
+  background: #ccc;
+}
+.btn-filter:hover {
+  background: rgba(204, 204, 204, 0.8);
+}
+
+.btn-pad {
+  padding: 8px 0;
+}
+
+.btn-margin {
+  margin: 10px 0;
+}
+
+.detail-section {
+  margin-top: 30px;
+}
+
+.filter-title {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 24px 0 8px;
+}
+
+option {
+  font-size: 1.4rem;
+}
+
+.panel {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.menu {
+  background-color: rgb(217, 227, 242);
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.menu a {
+  color: black;
+}
+
+.btnClass {
+  border: none;
+  background-color: white;
+  width: 100%;
+}
+
+.btnClass:focus {
+  color: blue;
+}
+
+.product-admin-section {
+  margin-top: 51px;
+}
+
+.pagination {
+  margin: 50px 10px;
+}
+.pagination__item {
+  border: 1px solid #ccc;
+  padding: 8px;
 }
 
 /*# sourceMappingURL=main.css.map */
