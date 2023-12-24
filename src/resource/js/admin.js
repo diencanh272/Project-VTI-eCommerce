@@ -6,9 +6,6 @@ $(function () {
 function loadComponentAdmin(params) {
     $(".header-admin").load("./templates-admin/HeaderAdmin.html");
     $(".sidebar-section").load("./templates-admin/SideBarAdmin.html");
-    // $(".product-admin-section").load(
-    //     "./templates-admin/ContentProductAdmin.html"
-    // );
 }
 
 // Click showProduct
@@ -44,7 +41,3 @@ function showCategory(params) {
         function () {}
     );
 }
-
-// ---------Generate data form
-
-//

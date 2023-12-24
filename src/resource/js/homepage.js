@@ -14,9 +14,8 @@ function loadComponent(params) {
 }
 
 function renderListProduct(params) {
-    for (let i = 0; i < 8; i++) {
+    for (var i = 0; i < 8; i++) {
         $(".product-list").append(`
-
         <div class="col">
                 <article class="product-card">
                     <div class="product-card__img-wrap">
