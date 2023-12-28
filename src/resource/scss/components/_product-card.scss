@@ -1,18 +1,12 @@
 .product-card {
     padding: 16px;
     border-radius: 20px;
-    box-shadow: 0px 20px 60px 10px rgba(237, 237, 246, 0.2);
     background: #fff;
-    transition: transform ease 0.3s;
 
     &__wrap {
         padding: 24px 16px;
 
         background: #a3090c;
-    }
-
-    &:hover {
-        transform: translateY(-10px);
     }
 
     &__img-wrap {
@@ -27,6 +21,11 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
+        transition: transform ease 0.3s;
+
+        &:hover {
+            transform: translateY(-10px);
+        }
     }
 
     &__info {
@@ -75,9 +74,13 @@
     &__buy {
         display: flex;
         align-items: center;
+        justify-content: space-between;
     }
 
-    &__cart {
-        margin-left: 80px;
+    &__cost {
+        color: #e83a45;
+        font-size: 1.6rem;
+        font-weight: 500;
+        line-height: 18px;
     }
 }

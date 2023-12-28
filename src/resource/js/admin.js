@@ -8,13 +8,15 @@ function loadComponentAdmin(params) {
     $(".sidebar-section").load("./templates-admin/SideBarAdmin.html");
 }
 
-// Click showProduct
+// Load các thành phần của trang Admin Page
 
 function showProduct(params) {
     $(".product-admin-section").load(
         "./templates-admin/ContentProductAdmin.html",
         "data",
-        function () {}
+        function () {
+            fetchListProductAdmin();
+        }
     );
 }
 
@@ -41,3 +43,5 @@ function showCategory(params) {
         function () {}
     );
 }
+
+// ***************Login Admin****************

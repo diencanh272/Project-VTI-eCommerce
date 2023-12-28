@@ -1,3 +1,5 @@
+var listProduct = [];
+
 $(function () {
     loadComponent();
 
@@ -14,25 +16,34 @@ function loadComponent(params) {
 }
 
 function renderListProduct(params) {
-    for (var i = 0; i < 8; i++) {
-        $(".product-list").append(`
-        <div class="col">
+    // Render List Product từ localStorage
+    if (localStorage && localStorage.getItem("listProductData")) {
+        // alert("Yes!");
+        var listProductHome = JSON.parse(
+            localStorage.getItem("listProductData")
+        );
+
+        listProduct = listProductHome;
+
+        for (let i = 0; i < listProductHome.length; i++) {
+            $(".product-list").append(`
+            <div class="col">
                 <article class="product-card">
                     <div class="product-card__img-wrap">
                         <a href="#!">
                             <img
-                                src="./src/assets/product/iphone-15-pro-blue-thumbnew-600x600.jpg"
-                                alt="Iphone 15 Pro Blue"
+                                src="./src/assets/product/${listProduct[i].imageFile}"
+                                alt="${listProduct[i].name}"
                                 class="product-card__thumb"
                             />
                         </a>
                     </div>
-
+        
                     <div class="product-card__info">
                         <h3 class="product-card__title line-clamp">
-                            <a href="#!"> Iphone 15 Pro 512GB </a>
+                            <a href="#!"> ${listProduct[i].name} </a>
                         </h3>
-                        <p class="product-card__brand">Hãng sản xuất: APPLE</p>
+                        <p class="product-card__brand">Hãng sản xuất: ${listProduct[i].manufacturerOption}</p>
                         <div class="product-card__value">
                             <button class="product-card__rating">
                                 <img
@@ -63,20 +74,21 @@ function renderListProduct(params) {
                             </button>
                         </div>
                         <div class="product-card__buy">
-                            <span class="product-card__cost">$47.00</span>
-                            <img
-                                class="product-card__cart"
-                                src="./src/assets/icons/cart.svg"
-                                alt="Cart"
-                            />
+                            <span class="product-card__cost">${listProduct[i].price}</span>
+                            <a href='#!'>
+                                <img
+                                    class="product-card__cart"
+                                    src="./src/assets/icons/cart.svg"
+                                    alt="Cart"
+                                />
+                            </a>
                         </div>
                     </div>
                 </article>
             </div>
         `);
+        }
+    } else {
+        alert("No Storage!");
     }
 }
-
-// $(document).ready(function () {
-//     $("#admin").click(function () {});
-// });
