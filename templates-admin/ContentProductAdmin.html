@@ -16,26 +16,25 @@
 <!-- Table Result -->
 <div class="row">
     <div class="col-12">
-        
         <div style="margin-top: 24px" class="panel panel-default">
             <div class="panel-body">
                 <!-- Add New Product -->
 
                 <!-- Button trigger modal -->
                 <button
-                style="margin: 10px 0;"
+                    style="margin: 10px 0"
                     type="button"
                     class="btn btn-primary"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    data-bs-target="#addProductModal"
                 >
                     Add New
                 </button>
 
                 <!-- Modal add product -->
                 <div
-                    class="modal fade edit-to-add"
-                    id="exampleModal"
+                    class="modal fade"
+                    id="addProductModal"
                     tabindex="-1"
                     aria-labelledby="exampleModalLabel"
                     aria-hidden="true"
@@ -45,7 +44,7 @@
                             <div class="modal-header">
                                 <h1
                                     class="modal-title"
-                                   style="font-size: 3rem; font-weight: 500;"
+                                    style="font-size: 3rem; font-weight: 500"
                                 >
                                     Create New Product
                                 </h1>
@@ -64,7 +63,7 @@
                                                 ID
                                             </label>
                                             <input
-                                                type="text"
+                                                type="number"
                                                 class="form-control"
                                                 placeholder="Id Input"
                                                 id="idInput"
@@ -100,7 +99,6 @@
                                                 class="form-control"
                                                 placeholder="Info Input"
                                                 id="infoInput"
-
                                             >
                                             </textarea>
                                         </div>
@@ -115,7 +113,6 @@
                                                 class="form-control"
                                                 placeholder="Details Input"
                                                 id="detailsInput"
-
                                             >
                                             </textarea>
                                         </div>
@@ -126,10 +123,9 @@
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                placeholder="Field Input"
-                                                id="fieldInput"
-                                            >
-                                            </input>
+                                                placeholder="Rating Star"
+                                                id="ratingStar"
+                                            />
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">
@@ -138,7 +134,7 @@
                                             <input
                                                 type="file"
                                                 class="form-control"
-                                               id="imageFile"
+                                                id="imageFile"
                                             />
                                         </div>
                                         <div class="col-12">
@@ -153,11 +149,19 @@
                                                 <option selected>
                                                     -- Choose a Manufacturer--
                                                 </option>
+
+                                                <option value="APPLE">
+                                                    APPLE
                                                 </option>
-                                                <option value="APPLE">APPLE</option>
-                                                <option value="SAMSUNG">SAMSUNG</option>
-                                                <option value="XIAOMI">XIAOMI</option>
-                                                <option value="OPPO">OPPO</option>
+                                                <option value="SAMSUNG">
+                                                    SAMSUNG
+                                                </option>
+                                                <option value="XIAOMI">
+                                                    XIAOMI
+                                                </option>
+                                                <option value="OPPO">
+                                                    OPPO
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-12">
@@ -172,19 +176,24 @@
                                                 <option selected>
                                                     -- Choose a Category--
                                                 </option>
+
+                                                <option value="Smart Phone">
+                                                    Smart Phone
                                                 </option>
-                                                <option value="Smart Phone">Smart Phone</option>
-                                                <option value="Tablet">Tablet</option>
-                                                <option value="Laptop">Laptop</option>
+                                                <option value="Tablet">
+                                                    Tablet
+                                                </option>
+                                                <option value="Laptop">
+                                                    Laptop
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div style="margin-top: 20px;">
+                                    <div style="margin-top: 20px">
                                         <button
                                             type="submit"
                                             class="btn btn-primary btn-save-product"
                                             onclick="handleCreateNewProduct()"
-                                           
                                         >
                                             Save
                                         </button>
@@ -204,12 +213,200 @@
                                 >
                                     Close
                                 </button>
-                                
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--End Add New Product -->
+
+                <!-- Update Modal -->
+                <div
+                    class="modal fade"
+                    id="updateProductModal"
+                    tabindex="-1"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1
+                                    class="modal-title"
+                                    style="font-size: 3rem; font-weight: 500"
+                                >
+                                    Update Product
+                                </h1>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                ID
+                                            </label>
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                placeholder="Id Input"
+                                                id="idUpdate"
+                                                disabled
+                                            />
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                Name
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Name Input"
+                                                id="nameUpdate"
+                                            />
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                Price
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Price Input"
+                                                id="priceUpdate"
+                                            />
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                Info
+                                            </label>
+                                            <textarea
+                                                class="form-control"
+                                                placeholder="Info Input"
+                                                id="infoUpdate"
+                                            >
+                                            </textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label
+                                                for="message-text"
+                                                class="col-form-label"
+                                            >
+                                                Details
+                                            </label>
+                                            <textarea
+                                                class="form-control"
+                                                placeholder="Details Input"
+                                                id="detailsUpdate"
+                                            >
+                                            </textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                Star
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Field Input"
+                                                id="fieldUpdate"
+                                            />
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                Image
+                                            </label>
+                                            <input
+                                                type="file"
+                                                class="form-control"
+                                                id="imageUpdate"
+                                            />
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                Manufacturer
+                                            </label>
+                                            <select
+                                                class="form-select"
+                                                aria-label="Default select example"
+                                                id="manufacturerOptionUpdate"
+                                            >
+                                                <option selected>
+                                                    -- Choose a Manufacturer--
+                                                </option>
+
+                                                <option value="APPLE">
+                                                    APPLE
+                                                </option>
+                                                <option value="SAMSUNG">
+                                                    SAMSUNG
+                                                </option>
+                                                <option value="XIAOMI">
+                                                    XIAOMI
+                                                </option>
+                                                <option value="OPPO">
+                                                    OPPO
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                Category
+                                            </label>
+                                            <select
+                                                class="form-select"
+                                                aria-label="Default select example"
+                                                id="categoryOptionUpdate"
+                                            >
+                                                <option selected>
+                                                    -- Choose a Category--
+                                                </option>
+
+                                                <option value="Smart Phone">
+                                                    Smart Phone
+                                                </option>
+                                                <option value="Tablet">
+                                                    Tablet
+                                                </option>
+                                                <option value="Laptop">
+                                                    Laptop
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 20px">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary btn-save-product"
+                                            onclick="handleUpdateProduct()"
+                                        >
+                                            Update
+                                        </button>
+                                        <button
+                                            class="btn btn-danger btn-reset-product"
+                                            onclick="handleResetFormUpdate()"
+                                        >
+                                            Reset
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Table -->
                 <table class="table table-hover">
                     <thead>
@@ -228,10 +425,33 @@
                         </tr>
                     </thead>
                     <tbody class="product-admin-data">
-                        <!-- Row 1 -->                    
+                        <!-- Row 1 -->
+                        <!-- <tr>
+                            <td>1</td>
+                            <td>Samsung Galaxy S22 Ultra 5G</td>
+                            <td>30.990.000₫</td>
+                            <td>
+                                6.9 inches, Chip MediaTek Helio G85 (12nm) mạnh
+                                mẽ, Ram 4G, Pin 7000 mAh
+                            </td>
+                            <td>ProductDetail1</td>
+                            <td>5</td>
+                            <td>image1.jpg</td>
+                            <td>SAMSUNG</td>
+                            <td>Điện thoại</td>
+                            <td>
+                                <button type="button" class="btn btn-warning">
+                                    Edit
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr> -->
                     </tbody>
                 </table>
-
                 <!-- End Table -->
             </div>
 
@@ -257,6 +477,7 @@
                     </ul>
                 </div>
             </div>
+
             <!--End Pagination -->
         </div>
     </div>

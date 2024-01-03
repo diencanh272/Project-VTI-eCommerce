@@ -3,6 +3,8 @@
 // ---------Save data modal create new--------------
 
 var listProductData = [];
+var idUpdateProduct = "";
+
 function handleCreateNewProduct(params) {
     // Lấy thông tin dữ liệu
     var idInput = $("#idInput").val();
@@ -10,7 +12,7 @@ function handleCreateNewProduct(params) {
     var priceInput = $("#priceInput").val();
     var infoInput = $("#infoInput").val();
     var detailsInput = $("#detailsInput").val();
-    var fieldInput = $("#fieldInput").val();
+    var ratingStar = $("#ratingStar").val();
     var imageFile = getImageName($("#imageFile").val());
     var manufacturerOption = $("#manufacturerOption").val();
     var categoryOption = $("#categoryOption").val();
@@ -21,7 +23,7 @@ function handleCreateNewProduct(params) {
         price: priceInput,
         info: infoInput,
         details: detailsInput,
-        field: fieldInput,
+        star: ratingStar,
         imageFile: imageFile,
         manufacturerOption: manufacturerOption,
         categoryOption: categoryOption,
@@ -62,17 +64,17 @@ function fetchListProductAdmin(params) {
         <td>${listProductData[i].price}</td>
         <td>${listProductData[i].info}</td>
         <td>${listProductData[i].details}</td>
-        <td>${listProductData[i].field}</td>
+        <td>${listProductData[i].star}</td>
         <td>${listProductData[i].imageFile}</td>
         <td>${listProductData[i].manufacturerOption}</td>
         <td>${listProductData[i].categoryOption}</td>
         <td>
-            <button type="button" class="btn btn-warning btn-edit-product" >
+            <button type="button" class="btn btn-warning btn-edit-product" onclick = "handleEditProduct(${listProductData[i].id})" >
                 Edit
             </button>
          </td>
          <td>
-            <button type="button" class="btn btn-danger" onclick = "handleDeleteProduct(${listProductData[i].id})">
+            <button type="button" class="btn btn-danger"  onclick = "handleDeleteProduct(${listProductData[i].id})">
                 Delete
             </button>
          </td>
@@ -88,7 +90,7 @@ function resetFormProductInput(params) {
     $("#priceInput").val("");
     $("#infoInput").val("");
     $("#detailsInput").val("");
-    $("#fieldInput").val("");
+    $("#ratingStar").val("");
     $("#imageFile").val("");
     $("#manufacturerOption").val("");
     $("#categoryOption").val("");
@@ -130,14 +132,58 @@ function handleDeleteProduct(idDel) {
 }
 
 //  *************Handle Edit Product ***********
-$(document).ready(function () {
-    $(".btn-edit-product").click(function () {
-        $(".edit-to-add").addClass("show");
-        $(".edit-to-add").css("display", "block");
-    });
-    // click edit button show form với input cũ
-    // edit trực tiếp lại input
-    //
-});
+function handleEditProduct(idEditProduct) {
+    idUpdateProduct = idEditProduct;
 
-// ***************** ĐỂ ID SẢN PHẨM TỰ TĂNG VÀO DISABLED
+    // Tìm id sản phẩm cần sửa
+    var index = listProductData.findIndex(function (product) {
+        return product.id == idUpdateProduct;
+    });
+
+    // gán lại giá trị vào ô input để sửa lại
+    $("#idUpdate").val(listProductData[index].id);
+    $("#nameUpdate").val(listProductData[index].name);
+    $("#priceUpdate").val(listProductData[index].price);
+    $("#infoUpdate").val(listProductData[index].info);
+    $("#detailsUpdate").val(listProductData[index].detail);
+    $("#starUpdate").val(listProductData[index].star);
+    $("#manufacturerOptionUpdate").val(
+        listProductData[index].manufacturerOption
+    );
+    $("#categoryOptionUpdate").val(listProductData[index].categoryOption);
+
+    $("#updateProductModal").modal("show");
+}
+
+// **** Handle reset form Update
+function handleResetFormUpdate() {
+    $("#idUpdate").val("");
+    $("#nameUpdate").val("");
+    $("#priceUpdate").val("");
+    $("#infoUpdate").val("");
+    $("#detailsUpdate").val("");
+    $("#starUpdate").val("");
+    $("#manufacturerOptionUpdate").val(0);
+    $("#categoryOptionUpdate").val(0);
+}
+
+// *** Handle update form
+function handleUpdateProduct() {
+    // Tìm id sản phẩm cần update
+    var index = listProductData.findIndex(function (product) {
+        return product.id == idUpdateProduct;
+    });
+}
+
+// ToDo ***************** ĐỂ ID SẢN PHẨM TỰ TĂNG VÀO DISABLED
+// ToDo ***************** phân trang
+// ToDo ***************** đăng kí đăng nhập
+// ToDo ***************** navigation
+// ! thứ năm kiểm tra bài tập
+// ! tuần sau kiểm tra lần 1
+
+// ! cần xử lý
+// 1. reset form update modal
+// 2. xử lý số lượng sao trong input
+// 3. chạy slide home page
+// 4. thêm footer
