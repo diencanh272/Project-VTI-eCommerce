@@ -1246,6 +1246,43 @@ label {
   gap: 4px;
 }
 
+.footer {
+  background: #fff;
+  margin-top: 50px;
+  border-top: 2px solid #ccc;
+}
+.footer-wrap {
+  margin: 20px 0;
+}
+.footer-item {
+  font-size: 1.4rem;
+}
+.footer-item:hover {
+  color: #2f80ed;
+}
+.footer-item + .footer-item {
+  margin-top: 20px;
+}
+.footer-social {
+  display: flex;
+  gap: 10px;
+}
+.footer-social__item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #2f80ed;
+}
+.footer-certify {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.copyright {
+  background: #e7e7e7;
+}
+
 html {
   --header-bg: #ffd400;
 }
@@ -1333,7 +1370,6 @@ html {
 .product-card__value {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 .product-card__rating {
   display: flex;

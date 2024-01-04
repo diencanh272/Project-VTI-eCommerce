@@ -1,0 +1,44 @@
+.footer {
+    background: #fff;
+    margin-top: 50px;
+    border-top: 2px solid #ccc;
+
+    &-wrap {
+        margin: 20px 0;
+    }
+
+    &-item {
+        font-size: 1.4rem;
+
+        &:hover {
+            color: #2f80ed;
+        }
+    }
+
+    &-item + &-item {
+        margin-top: 20px;
+    }
+
+    &-social {
+        display: flex;
+        gap: 10px;
+
+        &__item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            color: #2f80ed;
+        }
+    }
+
+    &-certify {
+        display: flex;
+        justify-content: center;
+        margin-top: 16px;
+    }
+}
+
+.copyright {
+    background: #e7e7e7;
+}

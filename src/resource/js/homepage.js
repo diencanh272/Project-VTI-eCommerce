@@ -28,7 +28,7 @@ function renderListProduct(params) {
 
     // listProduct = listProductHome;
 
-    //  Thực hiện call API
+    //  Thực hiện call API Product ra Home age
     $.ajax({
         type: "GET", // method
         url: "http://localhost:8080/api/v1/products", // path BE
@@ -56,7 +56,9 @@ function renderListProduct(params) {
                                 <div class="product-card__img-wrap">
                                     <a href="#!">
                                         <img
-                                            src="./src/assets/product/${listProduct[i].imageName}"
+                                            src="./src/assets/product/${
+                                                listProduct[i].imageName
+                                            }"
                                             alt="${listProduct[i].name}"
                                             class="product-card__thumb"
                                         />
@@ -65,40 +67,22 @@ function renderListProduct(params) {
             
                                 <div class="product-card__info">
                                     <h3 class="product-card__title line-clamp">
-                                        <a href="#!"> ${listProduct[i].name} </a>
+                                        <a href="#!"> ${
+                                            listProduct[i].name
+                                        } </a>
                                     </h3>
-                                    <p class="product-card__brand">Hãng sản xuất: ${listProduct[i].manufacturerName}</p>
-                                    <div class="product-card__value">
-                                        <button class="product-card__rating">
-                                            <img
-                                                src="./src/assets/icons/star.svg"
-                                                alt=""
-                                                class="product-card__star"
-                                            />
-                                            <img
-                                                src="./src/assets/icons/star.svg"
-                                                alt=""
-                                                class="product-card__star"
-                                            />
-                                            <img
-                                                src="./src/assets/icons/star.svg"
-                                                alt=""
-                                                class="product-card__star"
-                                            />
-                                            <img
-                                                src="./src/assets/icons/star.svg"
-                                                alt=""
-                                                class="product-card__star"
-                                            />
-                                            <img
-                                                src="./src/assets/icons/star-half.svg"
-                                                alt=""
-                                                class="product-card__star"
-                                            />
-                                        </button>
-                                    </div>
+                                    <p class="product-card__brand">Hãng sản xuất: ${
+                                        listProduct[i].manufacturerName
+                                    }</p>
+                                    <ul class="product-card__value">
+                                        ${showStarRating(
+                                            listProduct[i].ratingStar
+                                        )} 
+                                    </ul>
                                     <div class="product-card__buy">
-                                        <span class="product-card__cost">${listProduct[i].price}</span>
+                                        <span class="product-card__cost">${
+                                            listProduct[i].price
+                                        }</span>
                                         <a href='#!'>
                                             <img
                                                 class="product-card__cart"
@@ -115,4 +99,35 @@ function renderListProduct(params) {
             }
         },
     });
+}
+
+// Handle rating star
+
+function showStarRating(ratingStar) {
+    // Khai báo mảng
+    let starRating = "";
+    // Hiển thị đánh giá có Sao
+    for (let index = 1; index <= ratingStar; index++) {
+        starRating += `
+        <li>
+        <img
+        src="./src/assets/icons/star.svg"
+        alt=""
+        class="product-card__star"
+    />
+        </li>`;
+    }
+    // Hiển thị các Sao không được đánh gía
+    for (let index = 1; index <= 5 - ratingStar; index++) {
+        starRating += `
+      <li>
+      <img
+      src="./src/assets/icons/no-star.svg"
+      alt=""
+      class="product-card__star"
+  />
+      </li>`;
+    }
+    //
+    return starRating;
 }

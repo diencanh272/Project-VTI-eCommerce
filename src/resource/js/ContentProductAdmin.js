@@ -1,13 +1,16 @@
-// ---------Generate data--------------
+var idUpdateProduct = "";
+var listProductData = [];
+var listManufacturerData = [];
+var listCategoryData = [];
+var username = "admin";
+var password = 123456;
 
 // ---------Save data modal create new--------------
 
-var listProductData = [];
-var idUpdateProduct = "";
-
+//Tích hợp API cho AdminPage POST Data.
 function handleCreateNewProduct(params) {
     // Lấy thông tin dữ liệu
-    var idInput = $("#idInput").val();
+    // var idInput = $("#idInput").val();
     var nameInput = $("#nameInput").val();
     var priceInput = $("#priceInput").val();
     var infoInput = $("#infoInput").val();
@@ -18,21 +21,42 @@ function handleCreateNewProduct(params) {
     var categoryOption = $("#categoryOption").val();
 
     var listProductDataNew = {
-        id: idInput,
+        // id: idInput,
         name: nameInput,
         price: priceInput,
         info: infoInput,
-        details: detailsInput,
-        star: ratingStar,
-        imageFile: imageFile,
-        manufacturerOption: manufacturerOption,
-        categoryOption: categoryOption,
+        detail: detailsInput,
+        ratingStar: ratingStar,
+        imageName: imageFile,
+        manufacturerId: manufacturerOption,
+        categoryId: categoryOption,
     };
 
-    listProductData.push(listProductDataNew);
+    // listProductData.push(listProductDataNew);
+    // // lưu vào local
+    // localStorage.setItem("listProductData", JSON.stringify(listProductData));
 
-    // lưu vào local
-    localStorage.setItem("listProductData", JSON.stringify(listProductData));
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/api/v1/products",
+        data: JSON.stringify(listProductDataNew),
+        // dataType: "json",
+        contentType: "application/json; charset=UTF-8",
+        // xử lý đăng nhập với server
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " + btoa(username + ":" + password)
+            );
+        },
+        success: function (response, status) {
+            if (status === "content") {
+                fetchListProductAdmin();
+            } else {
+                console.log("Error!!");
+            }
+        },
+    });
 
     // reset lại form
     resetFormProductInput();
@@ -43,44 +67,65 @@ function handleCreateNewProduct(params) {
 
 // Hàm đổ dữ liệu vào table
 function fetchListProductAdmin(params) {
-    $(".product-admin-data").empty();
-
+    listProductData = [];
     // Get data lưu trữ tại localStorage
-    if (localStorage && localStorage.getItem("listProductData")) {
-        var listProductDataStorage = JSON.parse(
-            localStorage.getItem("listProductData")
-        );
+    // if (localStorage && localStorage.getItem("listProductData")) {
+    //     var listProductDataStorage = JSON.parse(
+    //         localStorage.getItem("listProductData")
+    //     );
+    //     // Lưu vào listProductData JS để render dữ liệu
+    //     listProductData = listProductDataStorage;
+    // }
 
-        // Lưu vào listProductData JS để render dữ liệu
-        listProductData = listProductDataStorage;
-    }
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/v1/products",
+        data: "data",
+        dataType: "json",
+        // xử lý đăng nhập với server
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " + btoa(username + ":" + password)
+            );
+        },
+        success: function (response, status) {
+            // console.log(status);
+            // console.log(response);
 
-    //  Lặp qua dữ liệu từ form rồi render
-    for (let i = 0; i < listProductData.length; i++) {
-        $(".product-admin-data").append(`
-        <tr>
-        <td>${listProductData[i].id}</td>
-        <td>${listProductData[i].name}</td>
-        <td>${listProductData[i].price}</td>
-        <td>${listProductData[i].info}</td>
-        <td>${listProductData[i].details}</td>
-        <td>${listProductData[i].star}</td>
-        <td>${listProductData[i].imageFile}</td>
-        <td>${listProductData[i].manufacturerOption}</td>
-        <td>${listProductData[i].categoryOption}</td>
-        <td>
-            <button type="button" class="btn btn-warning btn-edit-product" onclick = "handleEditProduct(${listProductData[i].id})" >
-                Edit
-            </button>
-         </td>
-         <td>
-            <button type="button" class="btn btn-danger"  onclick = "handleDeleteProduct(${listProductData[i].id})">
-                Delete
-            </button>
-         </td>
-        </tr>
-        `);
-    }
+            if (status === "success") {
+                listProductData = response.content;
+
+                $(".product-admin-data").empty();
+                //  Lặp qua dữ liệu từ form rồi render
+                for (let i = 0; i < listProductData.length; i++) {
+                    $(".product-admin-data").append(`
+                    <tr>
+                    <td>${listProductData[i].id}</td>
+                    <td>${listProductData[i].name}</td>
+                    <td>${listProductData[i].price}</td>
+                    <td>${listProductData[i].info}</td>
+                    <td>${listProductData[i].detail}</td>
+                    <td>${listProductData[i].ratingStar}</td>
+                    <td>${listProductData[i].imageName}</td>
+                    <td>${listProductData[i].manufacturerName}</td>
+                    <td>${listProductData[i].categoryName}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-edit-product" onclick = "handleEditProduct(${listProductData[i].id})" >
+                            Edit
+                        </button>
+                     </td>
+                     <td>
+                        <button type="button" class="btn btn-danger"  onclick = "handleDeleteProduct(${listProductData[i].id})">
+                            Delete
+                        </button>
+                     </td>
+                    </tr>
+                    `);
+                }
+            }
+        },
+    });
 }
 
 // Hàm resetForm
@@ -107,8 +152,72 @@ function getImageName(pathImage) {
     return imageName;
 }
 
-//  *************Handle Delete Product ***********
+//  Tích hợp API cho AdminPage Get dữ liệu Manufacturer
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8080/api/v1/manufacturers",
+    data: "data",
+    dataType: "json",
+    // xử lý đăng nhập với server
+    beforeSend: function (xhr) {
+        xhr.setRequestHeader(
+            "Authorization",
+            "Basic " + btoa(username + ":" + password)
+        );
+    },
+    success: function (response, status) {
+        // console.log(status);
+        // console.log(response);
 
+        if (status === "success") {
+            listManufacturerData = response;
+            for (let i = 0; i < listManufacturerData.length; i++) {
+                $("#manufacturerOption").append(`
+                <option value = "${listManufacturerData[i].id}">${listManufacturerData[i].name}</option>
+                `);
+
+                $("#manufacturerOptionUpdate").append(`
+                <option value = "${listManufacturerData[i].id}">${listManufacturerData[i].name}</option>
+                `);
+            }
+        }
+    },
+});
+
+//  Tích hợp API cho AdminPage Get dữ liệu Category
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8080/api/v1/categorys",
+    data: "data",
+    dataType: "json",
+    // xử lý đăng nhập với server
+    beforeSend: function (xhr) {
+        xhr.setRequestHeader(
+            "Authorization",
+            "Basic " + btoa(username + ":" + password)
+        );
+    },
+    success: function (response, status) {
+        // console.log(status);
+        // console.log(response);
+
+        if (status === "success") {
+            listCategoryData = response;
+            for (let i = 0; i < listCategoryData.length; i++) {
+                $("#categoryOption").append(`
+                <option value = "${listCategoryData[i].id}">${listCategoryData[i].name}</option>
+                `);
+
+                $("#categoryOptionUpdate").append(`
+                <option value = "${listCategoryData[i].id}">${listCategoryData[i].name}</option>
+                `);
+            }
+        }
+    },
+});
+
+//  *************Handle Delete Product ***********
+// Tích hợp API cho AdminPage DELETE Data.
 function handleDeleteProduct(idDel) {
     var confirmDelete = confirm("Bạn có chắc chắn xóa sản phẩm này không!");
 
@@ -118,20 +227,44 @@ function handleDeleteProduct(idDel) {
         });
 
         if (indexDelete !== -1) {
-            listProductData.splice(indexDelete, 1);
-            localStorage.setItem(
-                "listProductData",
-                JSON.stringify(listProductData)
-            );
+            var urlDelete = "http://localhost:8080/api/v1/products/" + idDel;
 
-            fetchListProductAdmin();
+            $.ajax({
+                type: "DELETE",
+                url: urlDelete,
+                // data: "data",
+                // dataType: "dataType",
+                // xử lý đăng nhập với server
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(
+                        "Authorization",
+                        "Basic " + btoa(username + ":" + password)
+                    );
+                },
+                success: function (response) {
+                    fetchListProductAdmin();
+                },
+            });
         } else {
-            alert("Không tìm thấy sản phẩm bạn muốn xóa");
+            alert("Không thể xóa sản phẩm!");
         }
+
+        // if (indexDelete !== -1) {
+        //     listProductData.splice(indexDelete, 1);
+        //     localStorage.setItem(
+        //         "listProductData",
+        //         JSON.stringify(listProductData)
+        //     );
+
+        //     fetchListProductAdmin();
+        // } else {
+        //     alert("Không tìm thấy sản phẩm bạn muốn xóa");
+        // }
     }
 }
 
 //  *************Handle Edit Product ***********
+// Tích hợp API cho AdminPage PUT Data.
 function handleEditProduct(idEditProduct) {
     idUpdateProduct = idEditProduct;
 
@@ -140,17 +273,26 @@ function handleEditProduct(idEditProduct) {
         return product.id == idUpdateProduct;
     });
 
+    // Tìm manufacturerId của Product cần Update
+    var manufacturerUpdate = listManufacturerData.find(
+        (manufacturer) =>
+            manufacturer.name == listProductData[index].manufacturerName
+    );
+
+    // Tìm categoryId của Product cần Update
+    var categoryUpdate = listCategoryData.find(
+        (category) => category.name == listProductData[index].categoryName
+    );
+
     // gán lại giá trị vào ô input để sửa lại
     $("#idUpdate").val(listProductData[index].id);
     $("#nameUpdate").val(listProductData[index].name);
     $("#priceUpdate").val(listProductData[index].price);
     $("#infoUpdate").val(listProductData[index].info);
     $("#detailsUpdate").val(listProductData[index].detail);
-    $("#starUpdate").val(listProductData[index].star);
-    $("#manufacturerOptionUpdate").val(
-        listProductData[index].manufacturerOption
-    );
-    $("#categoryOptionUpdate").val(listProductData[index].categoryOption);
+    $("#starUpdate").val(listProductData[index].ratingStar);
+    $("#manufacturerOptionUpdate").val(manufacturerUpdate.id);
+    $("#categoryOptionUpdate").val(categoryUpdate.id);
 
     $("#updateProductModal").modal("show");
 }
@@ -163,16 +305,70 @@ function handleResetFormUpdate() {
     $("#infoUpdate").val("");
     $("#detailsUpdate").val("");
     $("#starUpdate").val("");
+    $("#imageFile").val("");
     $("#manufacturerOptionUpdate").val(0);
     $("#categoryOptionUpdate").val(0);
 }
 
 // *** Handle update form
+// Tích hợp API cho AdminPage PUT Data.
 function handleUpdateProduct() {
     // Tìm id sản phẩm cần update
-    var index = listProductData.findIndex(function (product) {
-        return product.id == idUpdateProduct;
+    var index = listProductData.findIndex(
+        (product) => product.id == idUpdateProduct
+    );
+
+    var nameUpdate = $("#nameUpdate").val();
+    var priceUpdate = $("#priceUpdate").val();
+    var infoUpdate = $("#infoUpdate").val();
+    var detailUpdate = $("#detailsUpdate").val();
+    var starUpdate = $("#starUpdate").val();
+    var imageUpdate = getImageName($("#imageUpdate").val());
+    var manufacturerUpdate = $("#manufacturerOptionUpdate").val();
+    var categoryUpdate = $("#categoryOptionUpdate").val();
+
+    if (imageUpdate == null || imageUpdate == "") {
+        imageUpdate = listProductData[index].imageName;
+    }
+
+    let productUpdate = {
+        name: nameUpdate,
+        price: priceUpdate,
+        info: infoUpdate,
+        detail: detailUpdate,
+        ratingStar: starUpdate,
+        imageName: imageUpdate,
+        manufacturerId: manufacturerUpdate,
+        categoryId: categoryUpdate,
+    };
+
+    let urlUpdate = "http://localhost:8080/api/v1/products/" + idUpdateProduct;
+
+    $.ajax({
+        type: "PUT",
+        url: urlUpdate,
+        data: JSON.stringify(productUpdate),
+        // dataType: "dataType",
+        contentType: "application/json; charset=UTF-8",
+        // xử lý đăng nhập với server
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " + btoa(username + ":" + password)
+            );
+        },
+        success: function (response, status) {
+            // console.log(response);
+            // console.log(status);
+            if (status === "success") {
+                fetchListProductAdmin();
+            } else {
+                console.log("Update not success!!");
+            }
+        },
     });
+
+    handleResetFormUpdate();
 }
 
 // ToDo ***************** ĐỂ ID SẢN PHẨM TỰ TĂNG VÀO DISABLED
@@ -184,6 +380,5 @@ function handleUpdateProduct() {
 
 // ! cần xử lý
 // 1. reset form update modal
-// 2. xử lý số lượng sao trong input
 // 3. chạy slide home page
-// 4. thêm footer
+// 4. xử lý id của admin
