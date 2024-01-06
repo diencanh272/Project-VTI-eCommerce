@@ -11,7 +11,7 @@ function loadComponentAdmin(params) {
 // Load các thành phần của trang Admin Page
 
 function showProduct(params) {
-    $(".product-admin-section").load(
+    $(".admin-section").load(
         "./templates-admin/ContentProductAdmin.html",
         "data",
         function () {
@@ -21,27 +21,50 @@ function showProduct(params) {
 }
 
 function showManufacturer(params) {
-    $(".product-admin-section").load(
+    $(".admin-section").load(
         "./templates-admin/ContentManufacturerAdmin.html",
         "data",
-        function () {}
+        function () {
+            fetchListManuAdmin();
+        }
     );
 }
 
 function showAccount(params) {
-    $(".product-admin-section").load(
+    $(".admin-section").load(
         "./templates-admin/ContentAccountAdmin.html",
         "data",
-        function () {}
+        function () {
+            fetchListAccountAdmin();
+        }
     );
 }
 
 function showCategory(params) {
-    $(".product-admin-section").load(
+    $(".admin-section").load(
         "./templates-admin/ContentCategoryAdmin.html",
         "data",
-        function () {}
+        function () {
+            fetchListCategoryAdmin();
+        }
     );
+}
+
+// Get date
+function SetDate() {
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if (day < 10) {
+        day = "0" + day;
+    }
+    var today = year + "-" + month + "-" + day;
+
+    document.getElementById("createDate").value = today;
 }
 
 // ***************Login Admin****************

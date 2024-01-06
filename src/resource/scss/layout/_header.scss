@@ -3,19 +3,18 @@
 }
 
 .top-bar {
-    position: relative;
-    z-index: 1;
     padding: 20px 0;
 }
 
-.navbar {
+.navbar-wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     font-size: 1.8rem;
     font-weight: 500;
-
+}
+.navbar {
     &-link + &-link {
         margin-left: 20px;
     }

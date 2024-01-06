@@ -2,10 +2,10 @@
 
 <div class="container">
     <div class="top-bar">
-        <nav class="navbar">
+        <nav class="navbar-wrap">
             <div class="navbar-left">
                 <a href="./index.html" class="navbar-link">Home</a>
-                <a href="./admin.html" class="navbar-link">Admin</a>
+                <!-- <a href="./admin.html" class="navbar-link">Admin</a> -->
             </div>
             <div class="navbar-right">
                 <div class="navbar-right__item">
@@ -14,7 +14,106 @@
                         alt=""
                         class="navbar-right__icon"
                     />
-                    <a href="#!" class="navbar-link">Login</a>
+
+                    <!-- Button trigger modal -->
+                    <button
+                        type="button"
+                        class="btn btn-login-admin"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                    >
+                        Login
+                    </button>
+
+                    <!-- Modal -->
+                    <div
+                        class="modal fade"
+                        id="exampleModal"
+                        tabindex="-1"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 style="font-size: 2rem">Login Admin</h1>
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                    ></button>
+                                </div>
+                                <div class="modal-body" style="border: none">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label for="#emailLoginAdmin">
+                                                    Admin Manager
+                                                </label>
+                                                <input
+                                                    type="email"
+                                                    name=""
+                                                    placeholder="email123@gmail.com..."
+                                                    id="emailLoginAdmin"
+                                                    class="form-control"
+                                                    autocomplete="username"
+                                                    required
+                                                />
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="#emailLoginAdmin">
+                                                    User Name
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name=""
+                                                    placeholder="email123@gmail.com..."
+                                                    id="usernameLoginAdmin"
+                                                    class="form-control"
+                                                    autocomplete="username"
+                                                    required
+                                                />
+                                            </div>
+                                            <div class="col-12">
+                                                <label
+                                                    for="#passwordLoginAdmin"
+                                                >
+                                                    Password
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    name=""
+                                                    placeholder="Your password..."
+                                                    id="passwordLoginAdmin"
+                                                    class="form-control"
+                                                    autocomplete="username"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                        <div style="margin-top: 20px">
+                                            <button
+                                                type="button"
+                                                class="btn btn-primary"
+                                                id="checkLoginAdmin"
+                                                data-bs-dismiss="modal"
+                                                onclick="fetchListAccountAdminLogin()"
+                                            >
+                                                Login
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-success"
+                                            >
+                                                Sign Up
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="navbar-right__item">
                     <img

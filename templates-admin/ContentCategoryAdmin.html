@@ -1,1 +1,111 @@
-<h1>This Category Admin</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <!-- Add New Product -->
+
+        <!-- Button trigger modal -->
+        <button
+            style="margin: 10px 0"
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#addCategoryModal"
+        >
+            Add New
+        </button>
+
+        <!-- Modal add product -->
+        <div
+            class="modal fade"
+            id="addCategoryModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1
+                            class="modal-title"
+                            style="font-size: 3rem; font-weight: 500"
+                        >
+                            Create New Category
+                        </h1>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="form-label"> ID </label>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        placeholder="Id Input"
+                                        id="idInput"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">
+                                        Category Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder=" Category Name ..."
+                                        id="categoryName"
+                                    />
+                                </div>
+
+                                <!-- <div class="col-12">
+                                    <label class="form-label"> Image </label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id=""
+                                    />
+                                </div> -->
+                            </div>
+                            <div style="margin-top: 20px">
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                    onclick="handleCreateNewManufacturer()"
+                                >
+                                    Save
+                                </button>
+                                <button class="btn btn-danger">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody class="cate-admin-data"></tbody>
+        </table>
+    </div>
+</div>

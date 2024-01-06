@@ -1,4 +1,5 @@
 var listProduct = [];
+var listAccountData = [];
 var username = "admin";
 var password = 123456;
 
@@ -51,7 +52,7 @@ function renderListProduct(params) {
 
                 for (let i = 0; i < listProduct.length; i++) {
                     $(".product-list").append(`
-                        <div class="col">
+                        <div class="col col-lg-4 col-md-6 col-sm-6">
                             <article class="product-card">
                                 <div class="product-card__img-wrap">
                                     <a href="#!">
@@ -130,4 +131,45 @@ function showStarRating(ratingStar) {
     }
     //
     return starRating;
+}
+
+function fetchListAccountAdminLogin() {
+    listAccountData = [];
+    var listCheckEmailAccount = [];
+    var listCheckUserAccount = [];
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/v1/accounts",
+        data: "data",
+        dataType: "json",
+        // xử lý đăng nhập với server
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " + btoa(username + ":" + password)
+            );
+        },
+        success: function (response, status) {
+            if (status === "success") {
+                // console.log(response);
+                listAccountData = response;
+                for (let i = 0; i < listAccountData.length; i++) {
+                    listCheckEmailAccount.push(listAccountData[i].email);
+                    listCheckUserAccount.push(listAccountData[i].username);
+                    var v_emailLoginAdmin = $("#emailLoginAdmin").val();
+                    // var v_passwordLoginAdmin = $("#passwordLoginAdmin").val();
+                    var v_usernameLoginAdmin = $("#usernameLoginAdmin").val();
+                }
+                // console.log(listCheckEmailAccount);
+                // console.log(listCheckUserAccount);
+                if (
+                    listCheckEmailAccount.includes(v_emailLoginAdmin) &&
+                    listCheckUserAccount.includes(v_usernameLoginAdmin)
+                ) {
+                    // alert("hi");
+                    window.open("./admin.html");
+                }
+            }
+        },
+    });
 }

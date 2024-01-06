@@ -45,3 +45,9 @@ input::placeholder {
 label {
     font-weight: 500;
 }
+
+.dfcenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

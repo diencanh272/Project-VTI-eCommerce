@@ -31,11 +31,6 @@ function handleCreateNewProduct(params) {
         manufacturerId: manufacturerOption,
         categoryId: categoryOption,
     };
-
-    // listProductData.push(listProductDataNew);
-    // // lưu vào local
-    // localStorage.setItem("listProductData", JSON.stringify(listProductData));
-
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/api/v1/products",
@@ -50,7 +45,7 @@ function handleCreateNewProduct(params) {
             );
         },
         success: function (response, status) {
-            if (status === "content") {
+            if (status === "success") {
                 fetchListProductAdmin();
             } else {
                 console.log("Error!!");
@@ -95,7 +90,6 @@ function fetchListProductAdmin(params) {
 
             if (status === "success") {
                 listProductData = response.content;
-
                 $(".product-admin-data").empty();
                 //  Lặp qua dữ liệu từ form rồi render
                 for (let i = 0; i < listProductData.length; i++) {
@@ -110,17 +104,14 @@ function fetchListProductAdmin(params) {
                     <td>${listProductData[i].imageName}</td>
                     <td>${listProductData[i].manufacturerName}</td>
                     <td>${listProductData[i].categoryName}</td>
-                    <td>
-                        <button type="button" class="btn btn-warning btn-edit-product" onclick = "handleEditProduct(${listProductData[i].id})" >
-                            Edit
-                        </button>
-                     </td>
-                     <td>
-                        <button type="button" class="btn btn-danger"  onclick = "handleDeleteProduct(${listProductData[i].id})">
-                            Delete
-                        </button>
-                     </td>
+                    <td><button type="button" class="btn btn-success dfcenter"  onclick = "handleEditProduct(${listProductData[i].id})">
+                    <img src="./src/assets/icons/edit.svg" alt="" />
+                    </button></td>
+                    <td><button type="button" class="btn btn-danger dfcenter" onclick = "handleDeleteProduct(${listProductData[i].id})">
+                    <img src="./src/assets/icons/delete.svg" alt="" />
+                    </button></td>
                     </tr>
+
                     `);
                 }
             }
@@ -248,18 +239,6 @@ function handleDeleteProduct(idDel) {
         } else {
             alert("Không thể xóa sản phẩm!");
         }
-
-        // if (indexDelete !== -1) {
-        //     listProductData.splice(indexDelete, 1);
-        //     localStorage.setItem(
-        //         "listProductData",
-        //         JSON.stringify(listProductData)
-        //     );
-
-        //     fetchListProductAdmin();
-        // } else {
-        //     alert("Không tìm thấy sản phẩm bạn muốn xóa");
-        // }
     }
 }
 
@@ -369,16 +348,18 @@ function handleUpdateProduct() {
     });
 
     handleResetFormUpdate();
+    fetchListProductAdmin();
 }
 
-// ToDo ***************** ĐỂ ID SẢN PHẨM TỰ TĂNG VÀO DISABLED
 // ToDo ***************** phân trang
 // ToDo ***************** đăng kí đăng nhập
 // ToDo ***************** navigation
-// ! thứ năm kiểm tra bài tập
+// ! thứ 7 kiểm tra, ôn tập
 // ! tuần sau kiểm tra lần 1
 
 // ! cần xử lý
-// 1. reset form update modal
+
 // 3. chạy slide home page
-// 4. xử lý id của admin
+// 5. responsive
+// 9. account user
+// 10. debug js
