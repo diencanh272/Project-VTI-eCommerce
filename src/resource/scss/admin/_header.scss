@@ -1,0 +1,13 @@
+.header-admin {
+    background: #ccc !important;
+}
+.navbar-admin {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+
+    &__left {
+        display: flex;
+        gap: 20px;
+    }
+}

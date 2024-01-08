@@ -7,59 +7,6 @@ var password = 123456;
 
 // ---------Save data modal create new--------------
 
-//Tích hợp API cho AdminPage POST Data.
-function handleCreateNewProduct(params) {
-    // Lấy thông tin dữ liệu
-    // var idInput = $("#idInput").val();
-    var nameInput = $("#nameInput").val();
-    var priceInput = $("#priceInput").val();
-    var infoInput = $("#infoInput").val();
-    var detailsInput = $("#detailsInput").val();
-    var ratingStar = $("#ratingStar").val();
-    var imageFile = getImageName($("#imageFile").val());
-    var manufacturerOption = $("#manufacturerOption").val();
-    var categoryOption = $("#categoryOption").val();
-
-    var listProductDataNew = {
-        // id: idInput,
-        name: nameInput,
-        price: priceInput,
-        info: infoInput,
-        detail: detailsInput,
-        ratingStar: ratingStar,
-        imageName: imageFile,
-        manufacturerId: manufacturerOption,
-        categoryId: categoryOption,
-    };
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/api/v1/products",
-        data: JSON.stringify(listProductDataNew),
-        // dataType: "json",
-        contentType: "application/json; charset=UTF-8",
-        // xử lý đăng nhập với server
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader(
-                "Authorization",
-                "Basic " + btoa(username + ":" + password)
-            );
-        },
-        success: function (response, status) {
-            if (status === "success") {
-                fetchListProductAdmin();
-            } else {
-                console.log("Error!!");
-            }
-        },
-    });
-
-    // reset lại form
-    resetFormProductInput();
-
-    // đổ dữ liệu vào table
-    fetchListProductAdmin();
-}
-
 // Hàm đổ dữ liệu vào table
 function fetchListProductAdmin(params) {
     listProductData = [];
@@ -119,93 +66,58 @@ function fetchListProductAdmin(params) {
     });
 }
 
-// Hàm resetForm
-function resetFormProductInput(params) {
-    $("#idInput").val("");
-    $("#nameInput").val("");
-    $("#priceInput").val("");
-    $("#infoInput").val("");
-    $("#detailsInput").val("");
-    $("#ratingStar").val("");
-    $("#imageFile").val("");
-    $("#manufacturerOption").val("");
-    $("#categoryOption").val("");
-}
+//Tích hợp API cho AdminPage POST Data.
+function handleCreateNewProduct(params) {
+    // Lấy thông tin dữ liệu
+    // var idInput = $("#idInput").val();
+    var nameInput = $("#nameInput").val();
+    var priceInput = $("#priceInput").val();
+    var infoInput = $("#infoInput").val();
+    var detailsInput = $("#detailsInput").val();
+    var ratingStar = $("#ratingStar").val();
+    var imageFile = getImageName($("#imageFile").val());
+    var manufacturerOption = $("#manufacturerOption").val();
+    var categoryOption = $("#categoryOption").val();
 
-// Hàm lấy tên ảnh
-function getImageName(pathImage) {
-    // Chuyển đường dẫn thành mảng các phần tử
-    var itemArray = pathImage.split("\\");
-
-    // Lấy phần tử cuối cùng
-    var imageName = itemArray[itemArray.length - 1];
-
-    return imageName;
-}
-
-//  Tích hợp API cho AdminPage Get dữ liệu Manufacturer
-$.ajax({
-    type: "GET",
-    url: "http://localhost:8080/api/v1/manufacturers",
-    data: "data",
-    dataType: "json",
-    // xử lý đăng nhập với server
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader(
-            "Authorization",
-            "Basic " + btoa(username + ":" + password)
-        );
-    },
-    success: function (response, status) {
-        // console.log(status);
-        // console.log(response);
-
-        if (status === "success") {
-            listManufacturerData = response;
-            for (let i = 0; i < listManufacturerData.length; i++) {
-                $("#manufacturerOption").append(`
-                <option value = "${listManufacturerData[i].id}">${listManufacturerData[i].name}</option>
-                `);
-
-                $("#manufacturerOptionUpdate").append(`
-                <option value = "${listManufacturerData[i].id}">${listManufacturerData[i].name}</option>
-                `);
+    var listProductDataNew = {
+        // id: idInput,
+        name: nameInput,
+        price: priceInput,
+        info: infoInput,
+        detail: detailsInput,
+        ratingStar: ratingStar,
+        imageName: imageFile,
+        manufacturerId: manufacturerOption,
+        categoryId: categoryOption,
+    };
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/api/v1/products",
+        data: JSON.stringify(listProductDataNew),
+        // dataType: "json",
+        contentType: "application/json; charset=UTF-8",
+        // xử lý đăng nhập với server
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " + btoa(username + ":" + password)
+            );
+        },
+        success: function (response, status) {
+            if (status === "success") {
+                fetchListProductAdmin();
+            } else {
+                console.log("Error!!");
             }
-        }
-    },
-});
+        },
+    });
 
-//  Tích hợp API cho AdminPage Get dữ liệu Category
-$.ajax({
-    type: "GET",
-    url: "http://localhost:8080/api/v1/categorys",
-    data: "data",
-    dataType: "json",
-    // xử lý đăng nhập với server
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader(
-            "Authorization",
-            "Basic " + btoa(username + ":" + password)
-        );
-    },
-    success: function (response, status) {
-        // console.log(status);
-        // console.log(response);
+    // reset lại form
+    resetFormProductInput();
 
-        if (status === "success") {
-            listCategoryData = response;
-            for (let i = 0; i < listCategoryData.length; i++) {
-                $("#categoryOption").append(`
-                <option value = "${listCategoryData[i].id}">${listCategoryData[i].name}</option>
-                `);
-
-                $("#categoryOptionUpdate").append(`
-                <option value = "${listCategoryData[i].id}">${listCategoryData[i].name}</option>
-                `);
-            }
-        }
-    },
-});
+    // đổ dữ liệu vào table
+    fetchListProductAdmin();
+}
 
 //  *************Handle Delete Product ***********
 // Tích hợp API cho AdminPage DELETE Data.
@@ -276,19 +188,6 @@ function handleEditProduct(idEditProduct) {
     $("#updateProductModal").modal("show");
 }
 
-// **** Handle reset form Update
-function handleResetFormUpdate() {
-    $("#idUpdate").val("");
-    $("#nameUpdate").val("");
-    $("#priceUpdate").val("");
-    $("#infoUpdate").val("");
-    $("#detailsUpdate").val("");
-    $("#starUpdate").val("");
-    $("#imageFile").val("");
-    $("#manufacturerOptionUpdate").val(0);
-    $("#categoryOptionUpdate").val(0);
-}
-
 // *** Handle update form
 // Tích hợp API cho AdminPage PUT Data.
 function handleUpdateProduct() {
@@ -341,6 +240,7 @@ function handleUpdateProduct() {
             // console.log(status);
             if (status === "success") {
                 fetchListProductAdmin();
+                alert("Update success!!");
             } else {
                 console.log("Update not success!!");
             }
@@ -350,12 +250,47 @@ function handleUpdateProduct() {
     handleResetFormUpdate();
     fetchListProductAdmin();
 }
+// **** Handle reset form Update
+function handleResetFormUpdate() {
+    $("#idUpdate").val("");
+    $("#nameUpdate").val("");
+    $("#priceUpdate").val("");
+    $("#infoUpdate").val("");
+    $("#detailsUpdate").val("");
+    $("#starUpdate").val("");
+    $("#imageFile").val("");
+    $("#manufacturerOptionUpdate").val(0);
+    $("#categoryOptionUpdate").val(0);
+}
+// Hàm resetForm
+function resetFormProductInput(params) {
+    $("#idInput").val("");
+    $("#nameInput").val("");
+    $("#priceInput").val("");
+    $("#infoInput").val("");
+    $("#detailsInput").val("");
+    $("#ratingStar").val("");
+    $("#imageFile").val("");
+    $("#manufacturerOption").val("");
+    $("#categoryOption").val("");
+}
+
+// Hàm lấy tên ảnh
+function getImageName(pathImage) {
+    // Chuyển đường dẫn thành mảng các phần tử
+    var itemArray = pathImage.split("\\");
+
+    // Lấy phần tử cuối cùng
+    var imageName = itemArray[itemArray.length - 1];
+
+    return imageName;
+}
 
 // ToDo ***************** phân trang
 // ToDo ***************** đăng kí đăng nhập
 // ToDo ***************** navigation
 // ! thứ 7 kiểm tra, ôn tập
-// ! tuần sau kiểm tra lần 1
+// ! tuần 5,7 kiểm tra lần 1
 
 // ! cần xử lý
 
@@ -363,3 +298,4 @@ function handleUpdateProduct() {
 // 5. responsive
 // 9. account user
 // 10. debug js
+// 11. phan trang laptop tablet , breadcrumb

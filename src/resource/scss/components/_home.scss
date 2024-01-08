@@ -1,0 +1,20 @@
+.main-container {
+    position: relative;
+}
+
+.sticky {
+    &-sidebar {
+        position: fixed;
+        bottom: 1px;
+        z-index: 1;
+    }
+    &-right {
+        right: 0;
+    }
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}

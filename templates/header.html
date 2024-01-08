@@ -1,11 +1,34 @@
 <!-- Menu-Header -->
 
 <div class="container">
-    <div class="top-bar">
+    <div class="header__top">
         <nav class="navbar-wrap">
             <div class="navbar-left">
-                <a href="./index.html" class="navbar-link">Home</a>
+                <a href="./index.html" class="navbar-link">
+                    <img src="./src/assets/icons/logo.svg" alt="" />
+                    <h1>Techmart</h1>
+                </a>
                 <!-- <a href="./admin.html" class="navbar-link">Admin</a> -->
+            </div>
+            <div class="navbar-middle">
+                <div class="navbar-middle__wrap">
+                    <div class="navbar--btn">
+                        <button class="navbar--btn__location">
+                            Vị trí của bạn
+                        </button>
+                    </div>
+                    <div class="navbar__search">
+                        <input type="search" class="navbar__search--input" />
+                        <button class="navbar__search--icon">
+                            <img src="./src/assets/icons/search.svg" alt="" />
+                        </button>
+                    </div>
+                    <div class="navbar--btn">
+                        <button class="navbar--btn__user">
+                            Tài khoản và đơn hàng
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="navbar-right">
                 <div class="navbar-right__item">
@@ -45,35 +68,70 @@
                                     ></button>
                                 </div>
                                 <div class="modal-body" style="border: none">
-                                    <form>
+                                    <form id="formLoginAdmin">
                                         <div class="row">
                                             <div class="col-12">
                                                 <label for="#emailLoginAdmin">
                                                     Admin Manager
                                                 </label>
-                                                <input
-                                                    type="email"
+
+                                                <select
+                                                    class="form-select"
                                                     name=""
-                                                    placeholder="email123@gmail.com..."
                                                     id="emailLoginAdmin"
-                                                    class="form-control"
-                                                    autocomplete="username"
-                                                    required
-                                                />
+                                                >
+                                                    <option selected>
+                                                        Email Adminator
+                                                    </option>
+                                                    <option
+                                                        value="admin@gmail.com"
+                                                    >
+                                                        admin@gmail.com
+                                                    </option>
+                                                    <option
+                                                        value="Email1@gmail.com"
+                                                    >
+                                                        Email1@gmail.com
+                                                    </option>
+                                                    <option
+                                                        value="Email2@gmail.com"
+                                                    >
+                                                        Email2@gmail.com
+                                                    </option>
+                                                    <option
+                                                        value="Email3@gmail.com"
+                                                    >
+                                                        Email3@gmail.com
+                                                    </option>
+                                                </select>
                                             </div>
                                             <div class="col-12">
-                                                <label for="#emailLoginAdmin">
-                                                    User Name
+                                                <label
+                                                    for="#usernameLoginAdmin"
+                                                >
+                                                    Adminator Name
                                                 </label>
-                                                <input
-                                                    type="text"
+                                                <select
+                                                    class="form-select"
                                                     name=""
-                                                    placeholder="email123@gmail.com..."
                                                     id="usernameLoginAdmin"
-                                                    class="form-control"
-                                                    autocomplete="username"
-                                                    required
-                                                />
+                                                >
+                                                    <option selected>
+                                                        Name Adminator
+                                                    </option>
+                                                    <option value="admin">
+                                                        admin
+                                                    </option>
+                                                    <option value="Username1">
+                                                        Username1
+                                                    </option>
+                                                    <option value="Username2">
+                                                        Username2
+                                                    </option>
+                                                    <option value="Username3">
+                                                        Username3
+                                                    </option>
+                                                </select>
                                             </div>
                                             <div class="col-12">
                                                 <label
@@ -83,7 +141,6 @@
                                                 </label>
                                                 <input
                                                     type="password"
-                                                    name=""
                                                     placeholder="Your password..."
                                                     id="passwordLoginAdmin"
                                                     class="form-control"
@@ -126,4 +183,96 @@
             </div>
         </nav>
     </div>
+    <div class="header__main">
+        <ul class="header__main--list">
+            <li class="header__main--item">
+                <a
+                    href="#!"
+                    class="header__main--link"
+                    onclick="handleClickPhoneProduct()"
+                >
+                    <img src="./src/assets/icons/dt.svg" alt="Điện thoại" />
+                    <span>Điện thoại</span>
+                </a>
+            </li>
+            <li class="header__main--item">
+                <a
+                    href="#!"
+                    class="header__main--link"
+                    onclick="handleClickTabletProduct()"
+                >
+                    <img src="./src/assets/icons/tablet.svg" alt="Tablet" />
+                    <span>Tablet</span>
+                </a>
+            </li>
+            <li class="header__main--item">
+                <a
+                    href="#!"
+                    class="header__main--link"
+                    onclick="handleClickLaptopProduct()"
+                >
+                    <img src="./src/assets/icons/laptop.svg" alt="Laptop" />
+                    <span>Laptop</span>
+                </a>
+            </li>
+            <li class="header__main--item">
+                <a href="#!" class="header__main--link">
+                    <img src="./src/assets/icons/pk.svg" alt="Phụ kiện" />
+                    <span>Phụ kiện</span>
+                </a>
+            </li>
+            <li class="header__main--item">
+                <a href="#!" class="header__main--link">
+                    <img src="./src/assets/icons/tablet.svg" alt="Đồng hồ" />
+                    <span>Đồng hồ</span>
+                </a>
+            </li>
+            <li class="header__main--item">
+                <a href="#!" class="header__main--link">
+                    <img
+                        src="./src/assets/icons/laptop.svg"
+                        alt="Smart Watch"
+                    />
+                    <span>Smart Watch</span>
+                </a>
+            </li>
+            <li class="header__main--item">
+                <a href="#!" class="header__main--link">
+                    <img src="./src/assets/icons/dt.svg" alt="Máy cũ" />
+                    <span>Máy cũ, Thu cũ</span>
+                </a>
+            </li>
+            <li class="header__main--item">
+                <a href="#!" class="header__main--link">
+                    <img src="./src/assets/icons/print.svg" alt="PC, Máy in" />
+                    <span>PC, Máy in</span>
+                </a>
+            </li>
+            <li class="header__main--item">
+                <a href="#!" class="header__main--link">
+                    <!-- <img
+                        src="./src/assets/icons/laptop.svg"
+                        alt="SIM, Thẻ cào"
+                    /> -->
+                    <span>SIM, Thẻ cào</span>
+                </a>
+            </li>
+            <li class="header__main--item">
+                <a href="#!" class="header__main--link">
+                    <!-- <img
+                        src="./src/assets/icons/dt.svg"
+                        alt="Dịch vụ tiện ích"
+                    /> -->
+                    <span>Dịch vụ tiện ích</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="header__top--left">
+    <img src="./src/assets/img/header-trai-tgdd-248x78-1.png" alt="" />
+</div>
+<div class="header__top--right">
+    <img src="./src/assets/img/header-phai-tgdd-248x78.png" alt="" />
 </div>

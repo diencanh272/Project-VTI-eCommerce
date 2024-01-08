@@ -4,32 +4,57 @@
     <!-- Slider -->
 
     <div class="slideshow">
-        <div class="slideshow__inner">
-            <div class="slideshow__item">
-                <a href="#!" class="slideshow__link">
+        <div
+            id="carouselExampleAutoplaying"
+            class="carousel slide"
+            data-bs-ride="carousel"
+        >
+            <div class="carousel-inner">
+                <div class="carousel-item active">
                     <img
                         src="./src/assets/img/background-vti.png"
-                        alt=""
-                        class="slideshow__img"
+                        class="d-block w-100 slider-img__height"
+                        alt="..."
                     />
-                </a>
+                </div>
+                <div class="carousel-item">
+                    <img
+                        src="./src/assets/img/MHD-Desk-1920x450-1.png"
+                        class="d-block w-100 slider-img__height"
+                        alt="..."
+                    />
+                </div>
+                <div class="carousel-item">
+                    <img
+                        src="./src/assets/img/tab-mastel-1200-300-1200x300.png"
+                        class="d-block w-100 slider-img__height"
+                        alt="..."
+                    />
+                </div>
             </div>
-        </div>
-
-        <div class="slideshow__page">
-            <button class="slideshow__page--arrow slideshow__back">
-                <img
-                    class="slideshow__icon"
-                    src="./src/assets/icons/arrow-left.svg"
-                    alt=""
-                />
+            <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev"
+            >
+                <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
             </button>
-            <button class="slideshow__page--arrow slideshow__next">
-                <img
-                    class="slideshow__icon"
-                    src="./src/assets/icons/arrow-right.svg"
-                    alt=""
-                />
+            <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next"
+            >
+                <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
