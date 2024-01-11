@@ -97,7 +97,8 @@ function handleCreateAccount() {
                 status === "success" &&
                 v_passwordAccount === v_confirmPassword
             ) {
-                fetchListAccountAdmin();
+                alert("");
+                fetchListAccountAdmin("Thêm tài khoản thành công!!!");
             } else {
                 console.log("Thêm tài khoản không thành công!!!");
             }

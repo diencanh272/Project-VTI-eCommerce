@@ -1,5 +1,4 @@
 var idUpdateProduct = "";
-var listProductData = [];
 var listManufacturerData = [];
 var listCategoryData = [];
 var username = "admin";
@@ -9,16 +8,11 @@ var password = 123456;
 
 // Hàm đổ dữ liệu vào table
 function fetchListProductAdmin(params) {
-    listProductData = [];
-    // Get data lưu trữ tại localStorage
-    // if (localStorage && localStorage.getItem("listProductData")) {
-    //     var listProductDataStorage = JSON.parse(
-    //         localStorage.getItem("listProductData")
-    //     );
-    //     // Lưu vào listProductData JS để render dữ liệu
-    //     listProductData = listProductDataStorage;
-    // }
-
+    var listProductData = [];
+    var sliceProductPage = [];
+    var totalPage = 0;
+    var productPerPage = 10;
+    var currentPage = 1;
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/api/v1/products",
@@ -31,39 +25,86 @@ function fetchListProductAdmin(params) {
                 "Basic " + btoa(username + ":" + password)
             );
         },
+
         success: function (response, status) {
             // console.log(status);
             // console.log(response);
 
             if (status === "success") {
                 listProductData = response.content;
-                $(".product-admin-data").empty();
-                //  Lặp qua dữ liệu từ form rồi render
-                for (let i = 0; i < listProductData.length; i++) {
-                    $(".product-admin-data").append(`
-                    <tr>
-                    <td>${listProductData[i].id}</td>
-                    <td>${listProductData[i].name}</td>
-                    <td>${listProductData[i].price}</td>
-                    <td>${listProductData[i].info}</td>
-                    <td>${listProductData[i].detail}</td>
-                    <td>${listProductData[i].ratingStar}</td>
-                    <td>${listProductData[i].imageName}</td>
-                    <td>${listProductData[i].manufacturerName}</td>
-                    <td>${listProductData[i].categoryName}</td>
-                    <td><button type="button" class="btn btn-success dfcenter"  onclick = "handleEditProduct(${listProductData[i].id})">
-                    <img src="./src/assets/icons/edit.svg" alt="" />
-                    </button></td>
-                    <td><button type="button" class="btn btn-danger dfcenter" onclick = "handleDeleteProduct(${listProductData[i].id})">
-                    <img src="./src/assets/icons/delete.svg" alt="" />
-                    </button></td>
-                    </tr>
 
-                    `);
-                }
+                // *****Pagination
+                // sliceProductPage
+                sliceProductPage = listProductData.slice(
+                    (currentPage - 1) * productPerPage,
+                    currentPage * productPerPage
+                );
+                renderPageNumber();
+                renderProductPageData();
             }
         },
     });
+    // Render page number
+    function renderPageNumber() {
+        $(".pagination").empty();
+        // total page
+        var rowPage = Math.ceil(listProductData.length / productPerPage);
+        //console.log(rowPage);
+        for (i = 1; i <= rowPage; i++) {
+            $(".pagination").append(`
+                        <li class="pagination__item" onclick = "changePage(${i})">
+                            ${i}
+                        </li>
+                `);
+
+            if (currentPage === i) {
+                $(".pagination__item").addClass("active-page");
+            }
+        }
+
+        $(".pagination__item")
+            .not(`:nth-child(${currentPage})`)
+            .removeClass("active-page");
+
+        // change current page
+        changePage = (page) => {
+            currentPage = page;
+            sliceProductPage = listProductData.slice(
+                (currentPage - 1) * productPerPage,
+                currentPage * productPerPage
+            );
+            renderPageNumber();
+            renderProductPageData();
+        };
+    }
+
+    // Render product page data
+    function renderProductPageData() {
+        $(".product-admin-data").empty();
+        //  Lặp qua dữ liệu từ form rồi render
+        for (let i = 0; i < sliceProductPage.length; i++) {
+            $(".product-admin-data").append(`
+                <tr>
+                <td>${sliceProductPage[i].id}</td>
+                <td>${sliceProductPage[i].name}</td>
+                <td>${sliceProductPage[i].price}</td>
+                <td>${sliceProductPage[i].info}</td>
+                <td>${sliceProductPage[i].detail}</td>
+                <td>${sliceProductPage[i].ratingStar}</td>
+                <td>${sliceProductPage[i].imageName}</td>
+                <td>${sliceProductPage[i].manufacturerName}</td>
+                <td>${sliceProductPage[i].categoryName}</td>
+                <td><button type="button" class="btn btn-success dfcenter"  onclick = "handleEditProduct(${sliceProductPage[i].id})">
+                <img src="./src/assets/icons/edit.svg" alt="" />
+                </button></td>
+                <td><button type="button" class="btn btn-danger dfcenter" onclick = "handleDeleteProduct(${sliceProductPage[i].id})">
+                <img src="./src/assets/icons/delete.svg" alt="" />
+                </button></td>
+                </tr>
+
+                `);
+        }
+    }
 }
 
 //Tích hợp API cho AdminPage POST Data.
@@ -286,16 +327,8 @@ function getImageName(pathImage) {
     return imageName;
 }
 
-// ToDo ***************** phân trang
-// ToDo ***************** đăng kí đăng nhập
-// ToDo ***************** navigation
-// ! thứ 7 kiểm tra, ôn tập
-// ! tuần 5,7 kiểm tra lần 1
-
-// ! cần xử lý
-
-// 3. chạy slide home page
-// 5. responsive
-// 9. account user
-// 10. debug js
-// 11. phan trang laptop tablet , breadcrumb
+// ToDo ***************** chạy lại web xem lại code
+// ToDo ***************** ôn tập
+// ToDo *****************
+// ToDo *****************
+// ToDo *****************

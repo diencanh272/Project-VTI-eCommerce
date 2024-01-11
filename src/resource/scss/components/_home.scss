@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 .main-container {
     position: relative;
 }
@@ -7,6 +9,10 @@
         position: fixed;
         bottom: 1px;
         z-index: 1;
+
+        @include abstracts.screen(lg) {
+            display: none;
+        }
     }
     &-right {
         right: 0;

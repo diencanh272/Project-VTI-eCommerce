@@ -1,13 +1,18 @@
+@use "../abstracts";
+
 %poa-top-0 {
     position: absolute;
     top: 0;
 }
 .header {
-    position: sticky;
+    position: relative;
     top: 0;
-    z-index: 99;
     background: var(--header-bg);
     overflow: hidden;
+
+    @include abstracts.screen(lg) {
+        overflow: visible;
+    }
 }
 
 .header__top {
@@ -16,27 +21,81 @@
     &--left {
         @extend %poa-top-0;
         left: -10%;
+        @include abstracts.screen(xl) {
+            left: -12%;
+        }
+        @include abstracts.screen(lg) {
+            display: none;
+        }
     }
 
     &--right {
         @extend %poa-top-0;
         right: -10%;
+        @include abstracts.screen(xl) {
+            right: -12%;
+        }
+        @include abstracts.screen(lg) {
+            display: none;
+        }
+    }
+
+    &--lg {
+        @include abstracts.screen(lg) {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: row-reverse;
+        }
     }
 }
 
 .header__main {
     padding: 0 0 16px;
 
+    @include abstracts.screen(lg) {
+        padding: 0;
+    }
+
     &--list {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        @include abstracts.screen(lg) {
+            display: none;
+        }
     }
 
     &--link {
         display: flex;
         align-items: center;
         gap: 6px;
+        padding: 4px;
+        border-radius: 4px;
+
+        &:hover {
+            background: #fcba04;
+        }
+
+        @include abstracts.screen(xl) {
+            flex-direction: column;
+        }
+
+        @include abstracts.screen(lg) {
+            font-size: 2rem;
+            padding: 10px;
+
+            margin: 6px;
+            flex-direction: row;
+        }
+    }
+    &--menu-btn {
+        display: none;
+
+        @include abstracts.screen(lg) {
+            display: block;
+        }
     }
 }
 
@@ -47,6 +106,13 @@
 
     font-size: 1.8rem;
     font-weight: 500;
+
+    @include abstracts.screen(lg) {
+        gap: 50px;
+    }
+    @include abstracts.screen(md) {
+        gap: 20px;
+    }
 }
 .navbar {
     &-link + &-link {
@@ -68,6 +134,10 @@
             display: flex;
             align-items: center;
             gap: 4px;
+
+            @include abstracts.screen(lg) {
+                display: none;
+            }
         }
     }
 
@@ -87,7 +157,8 @@
         line-height: 15px;
         margin-right: 21px;
 
-        &__location {
+        @include abstracts.screen(lg) {
+            display: none;
         }
     }
 

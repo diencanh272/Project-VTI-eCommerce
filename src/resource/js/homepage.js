@@ -129,7 +129,6 @@ function showStarRating(ratingStar) {
 
 // Login Admin
 function fetchListAccountAdminLogin() {
-    listAccountData = [];
     var listCheckEmailAccount = [];
     var listCheckUserAccount = [];
     $.ajax({
@@ -176,6 +175,13 @@ function fetchListAccountAdminLogin() {
                 }
             }
         },
+    });
+
+    // Enter Event Login
+    $("#passwordLoginAdmin").on("keyup", function (e) {
+        if (e.key === "Enter" || e.keyCode === 13) {
+            fetchListAccountAdminLogin();
+        }
     });
 }
 

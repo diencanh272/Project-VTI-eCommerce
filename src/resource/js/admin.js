@@ -69,7 +69,7 @@ function showProduct(params) {
                         listCategoryData = response;
                         for (let i = 0; i < listCategoryData.length; i++) {
                             $("#categoryOption").append(`
-                <option value = "${listCategoryData[i].id}">${listCategoryData[i].name}</option>
+                            <option value = "${listCategoryData[i].id}">${listCategoryData[i].name}</option>
                 `);
 
                             $("#categoryOptionUpdate").append(`
